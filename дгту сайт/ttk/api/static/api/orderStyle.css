@@ -1,0 +1,154 @@
+
+@font-face {
+	font-family: Kosugi;
+	src: url(SF-Pro-Display-Medium.otf);
+  }
+
+html
+{
+	height: 100%;
+	background-image:url(phon.jpg);
+	background-repeat: no-repeat;
+    background-size:cover;
+	background-position: center;
+	
+  }
+
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	color:  black;
+	
+	font-family: Kosugi, Arial,sans-serif;
+	
+	
+}
+
+
+::placeholder{
+	color:  #626262;
+	text-align: center;
+
+}
+
+.container {
+	max-width: 100%;
+	max-height: 100%;
+	
+}
+
+.inner {
+	display: grid;
+	grid-template-columns: 1fr ;
+	grid-template-rows: auto;
+}
+.inner_2 {
+	background:  #ffffff ;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	display: grid;
+	grid-template-columns: 1fr 3fr 1fr ;
+	grid-template-rows: auto;
+	border-color:rgb(224, 37, 34)  ;
+	border-width:3px;
+	border-style:outset;
+}
+
+
+.item {
+	text-align: center;
+}
+
+.headRow{
+	background:rgb(224, 37, 34) ;
+	background-image:url(logo-rgd.png);
+
+	background-repeat: no-repeat;
+    background-size:contain;
+	background-position: center;
+	
+	
+	
+}
+.edit{
+	margin-top: 20px;
+	margin-right: 50px;
+	float: right;
+	color: #fff;
+	text-decoration: none;
+	
+}
+.order{	
+	margin-top: 20px;
+	margin-left: 50px;
+	float: left;
+	color: #fff;
+
+}
+
+.mainList{
+	width: 100%;
+	height: 50px;
+	margin-bottom: 15px;
+	
+	
+} 
+
+.Comment{
+	
+	 display:flex; 
+	 justify-content: center;
+	border-color:rgb(224, 37, 34)  ;
+	border-width:3px;
+	border-style:outset;
+	
+}
+.commentWindow{
+
+	color: #000000;
+	background-color: #f9f9f9 ;
+	width: 100%;
+	resize: none;
+	border: none;
+	outline: none;
+	
+
+}
+.CommentText{
+	text-align: center;
+	margin: 5px;
+	font-size: 13px;
+	color: #ffffff;
+}
+
+.imgProd{
+	border-right: 1px solid rgba(128, 128, 128, 0.3);
+	padding-right: 5px;
+	height: 50px;
+}
+
+.img{
+	width: 100%;
+	height: 100%;
+}
+
+.infoProd{
+	text-align: center;
+	vertical-align: middle;
+	border-right: 1px solid rgba(128, 128, 128, 0.3);
+
+	height: 50px;
+}
+.costProd{
+	text-align: center;
+	vertical-align: middle;
+
+	height: 50px;
+}
+
+
+
+
+
+

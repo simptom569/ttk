@@ -1,0 +1,190 @@
+@font-face {
+	font-family: Kosugi;
+	src: url(SF-Pro-Display-Medium.otf);
+  }
+
+
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	color:  black;
+	font-family: Kosugi, Arial,sans-serif;
+	
+	
+}
+
+.container {
+	max-width: 100%;
+	max-height: 100%;
+	
+}
+
+.innerProd {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	background-repeat: no-repeat;
+    background-size:cover;
+	background-position: center;
+	overflow-y:auto;
+
+}
+
+.innerCat{
+	
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 34% 34% 34%;
+	background-repeat: no-repeat;
+    background-size:cover;
+	background-position: center;
+}
+
+.inner2{
+	display: grid;
+	grid-template-columns: 1fr;
+}
+
+.img {
+	margin-top: 10%;
+	width: 50%;
+	height: 50%;
+	
+}
+
+.item {
+	background-color:rgba(51, 51, 51, 0.9) ;
+	margin: 20px;
+	text-align: center;
+	border-radius: 10px;
+	height: 210px;
+}
+
+.btn {
+	display: inline-block;
+	padding: 10px 20px;
+	margin-bottom: 10px;
+	border: none;
+	background: rgba(248, 24, 24, 0.401);
+	border-radius: 10px;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: 700;
+	
+
+	transition: background .3s linear;
+}
+
+.btn:hover {
+	background: rgb(224, 37, 34);
+}
+
+.usercard {
+	text-align: center;
+}
+.category{
+	text-align: center;
+	font-weight:bold;
+	color: #ffffff;
+}
+
+.product{
+
+	margin: 0px 0px 3px 0px;
+	display: block;
+	color: #fff;
+
+}
+
+.price{
+	margin: 5px 0px 5px 0px;
+	color: #fff;
+	font-size: 12px;
+}
+
+.schet{
+	display: none;
+	font-size: 12px;
+	color: #ffffff;
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+.btnPlus{
+	display: none;
+	
+	height: 25px;
+	border: none;
+	width: 25px;
+	background: rgb(248, 168, 24);
+	border-radius: 10px;
+	color: #fff;
+	text-transform: uppercase;
+	text-align: center;
+
+	transition: background .3s linear;
+}
+
+.btnPlus:hover{
+	background:rgb(224, 37, 34);
+}
+
+.btnMinus{
+	display: none;
+	height: 25px;
+	border: none;
+	width: 25px;
+	background: rgb(248, 168, 24);
+	border-radius: 10px;
+	color: #fff;
+	text-transform: uppercase;
+	text-align: center;
+
+	transition: background .3s linear;
+}
+
+.btnMinus:hover{
+	background: rgb(224, 37, 34);
+}
+
+
+.plusMinusImg{
+	width: 100%;
+}
+
+.prodDiv{
+	background-color: rgb(224, 37, 34) ;
+	height: 50px;
+}
+.catDiv{
+	
+	background-color: rgb(224, 37, 34) ;
+	height: 50px;
+	text-align: center;
+	vertical-align: bottom;
+	width: 100%;
+	bottom: 0;
+	
+	
+}
+.fot_text{
+
+	margin: 0;
+	font-size: 10px;
+	color: rgba(211, 211, 211, 0.5);
+}
+.Number
+{
+	margin: 5px 0px 0px 0px;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.904);
+
+}
+.infoNum{
+	color: rgba(255, 255, 255, 0.904);
+	margin: 0px;
+	font-size: 10px;
+}
+
+
+

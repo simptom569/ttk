@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'orderStyle.css' %}">
+	<title>Document</title>
+</head>
+<body>
+	<div class="container">
+		<div class="inner">
+
+			<div class="headRow">
+			
+                <p class="order">Your order </p>
+          		 <a class="edit" href="#" title="Edit">Edit</a>
+				
+			</div>
+
+			<div class="mainList">
+				<div class="inner_2">
+					<div class="imgProd">
+						<img src="prod/1.png" alt="" class="img">
+					</div>	
+
+					<div class="infoProd">
+					<p>Товар</p>
+					</div>	
+
+					<div class="costProd">
+					<p>10$</p>
+					</div>	
+				</div>
+			</div>
+			<p class="CommentText">Коментарий для проводника:</p>
+
+			<div class="Comment">
+				
+                <textarea class="commentWindow" placeholder="Add comment..."></textarea>
+			</div>
+            
+		</div>
+
+	</div>
+
+
+	<div class="usercard" id="usercard"></div>
+
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+	<script src="app.js"></script>
+</body>
+</html>

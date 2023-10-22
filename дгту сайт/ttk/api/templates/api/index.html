@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'api/style.css' %}">
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="{% static 'api/code.js' %}"></script>
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.onload = function(){
+			const searchParams = new URLSearchParams(window.location.search);
+			let train = searchParams.get('train');
+			let van = searchParams.get("van");
+			let place = searchParams.get("place");
+			let tg = window.Telegram.WebApp;
+			tg.expand();
+			var MainButton = tg.MainButton;
+			MainButton.show();
+			MainButton.onClick(function() {
+				$.ajax({
+					url: '/create_link',
+					method: 'GET',
+					dataType: 'json',
+					data: {
+						"train": train,
+						"van": van,
+						"place": place,
+						"products": JSON.stringify(jsonData),
+					},
+					success: function(data){
+						tg.openInvoice(data.data);
+					}
+				});
+			});
+			let data = {{ datas }};
+			data = data.data;
+			text = "";
+			let jsonData = {};
+			let jsonProxy = new Proxy(jsonData, {
+				set: function(target, key, value){
+					target[key] = value;
+					if (Object.keys(target).length === 0){
+						console.log("12123123");
+					}
+
+					return true;
+				}
+			})
+			for (let i = 0; i < data.length; i++) {
+				let img = data[i].img;
+				text += `<div class='item'>`;
+				text += `<img src="{% static 'api/img/prod/' %}${img}" class="img">`;
+				text += `<p class="product" id="product_${i}">${data[i].name}</p>`;
+				text += `<p class="price" id="price_${i}">${data[i].price}</p>`;
+				text += `<button class="btnMinus" id="bt2_${i}"><img src="{% static 'api/img/minus.png' %}" alt="" class="plusMinusImg"></button>`;
+				text += `<div class="schet" id="schet_${i}"><span id="active_kol_${i}">0</span>/<span id="max_kol_${i}">${data[i].count}</span></div>`;
+				text += `<button class="btnPlus" id="bt1_${i}"><img src="{% static 'api/img/plus.png' %}" alt="" class="plusMinusImg"></button>`;
+				text += `<button class="btn" id="btn${i}">Add</button>`;
+				text += `</div>`;
+			}
+			$("#gg").append(text);
+			for (let i = 0; i < data.length; i++) {
+					document.getElementById(`btn${i}`).addEventListener("click", function(event){
+						document.getElementById(`btn${i}`).style.display = "none";
+						document.getElementById(`bt1_${i}`).style.display = "inline-block";
+						document.getElementById(`schet_${i}`).style.display = "inline-block";
+						document.getElementById(`bt2_${i}`).style.display = "inline-block";
+						
+						// Изменение значения "active_col" только в текущем div
+						let activeCol = document.getElementById(`active_kol_${i}`);
+						let currentValue = parseInt(activeCol.innerText);
+						activeCol.innerText = currentValue + 1;
+						jsonData[data[i].name] = (currentValue + 1);
+						console.log(jsonData);
+    				});
+					document.getElementById(`bt1_${i}`).addEventListener("click", function(event){
+						let activeCol = document.getElementById(`active_kol_${i}`);
+						let currentValue = parseInt(activeCol.innerText);
+						let maxKol = parseInt(document.getElementById(`max_kol_${i}`).innerText);
+						if (currentValue < maxKol){
+							activeCol.innerText = currentValue + 1;
+							jsonData[data[i].name] += 1;
+							console.log(jsonData);
+						};
+					});
+					document.getElementById(`bt2_${i}`).addEventListener("click", function(event){
+						let activeCol = document.getElementById(`active_kol_${i}`);
+						let currentValue = parseInt(activeCol.innerText);
+						if (currentValue > 0){
+							currentValue -= 1;
+							activeCol.innerText = currentValue;
+							jsonData[data[i].name] -= 1;
+							if (currentValue == 0){
+								delete jsonData[data[i].name];
+								document.getElementById(`btn${i}`).style.display = "inline-block";
+								document.getElementById(`bt1_${i}`).style.display = "none";
+								document.getElementById(`schet_${i}`).style.display = "none";
+								document.getElementById(`bt2_${i}`).style.display = "none";
+							}
+							console.log(jsonData);
+						}
+					});
+			};
+		};
+	</script>
+	<div class="container">
+		<div class="inner2">
+
+			<div class="prodDiv">
+				<p class="category">Товары:</p>
+			</div>
+
+			<div class="innerProd" id="gg">
+		</div>
+
+		<!-- <div class="catDiv">
+			<p class="Number">8 800 775-00-00</p>
+			<p class="infoNum">Звонок бесплатный для всех регионов РФ</p>
+			<p class="fot_text">© ОАО «РЖД», 2003 - 2023</p>
+		</div> -->
+
+	</div>
+
+	</div>
+</body>
+</html>
