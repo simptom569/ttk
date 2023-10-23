@@ -42,7 +42,7 @@ async def create_user(tg_id: int, login: str, password: str) -> bool:
                 break
         cursor.execute(f"INSERT INTO users VALUES ({user_id}, {tg_id}, '{login}', '{password}')")
         conn.commit()
-        await set_logged(1, tg_id)
+        await set_logged(user_id, tg_id)
         return True
     return False
 
@@ -59,8 +59,10 @@ async def get_user_ticket_info(series_number: int) -> dict:
         return data
 
 async def get_user_id(tg_id: int) -> int:
+    print(tg_id)
     cursor.execute(f"SELECT id FROM logged WHERE tg_id={tg_id}")
-    user_id = cursor.fetchone()[0]
+    user_id = cursor.fetchone()
+    print(user_id)
     return user_id
 
 async def set_pay_order(user_id: int) -> None:

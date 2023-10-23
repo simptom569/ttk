@@ -23,6 +23,7 @@ async def process_precheck(precheck: PreCheckoutQuery, bot: Bot):
 
 @dp.message(F.successful_payment)
 async def process_pay(message: Message):
-    user_id = get_user_id(message.from_user.id)
+    user_id = await get_user_id(message.from_user.id)
+    print(user_id)
     await set_pay_order(user_id)
     await process_successful_payment(message)
