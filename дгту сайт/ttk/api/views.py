@@ -35,15 +35,20 @@ def get_place(request):
 def create_link(request):
     if request.method == "GET":
         train = request.GET.get("train")
+        print(train)
         van = request.GET.get("van")
+        print(van)
         place = request.GET.get("place")
-        products = ast.literal_eval(request.GET.get("products"))
+        print(place)
+        products = request.GET.get("products")
+        productss = ast.literal_eval(products)
         prices = 0
-        for key, item in products.items():
+        for key, item in productss.items():
             cursor.execute(f"SELECT price FROM products WHERE name='{key}'")
             price = cursor.fetchone()[0]
             prices += int(price)*int(item)
-        user_id = cursor.execute(f"SELECT id FROM tickets WHERE train='{train}' AND van='{van}' AND place='{place}'")
+        cursor.execute(f"SELECT id FROM tickets WHERE train='{train}' AND van='{van}' AND place='{place}'")
+        user_id = cursor.fetchone()[0]
         token = '5656192477:AAF72rp7q0gqT9mlYONs96MMXh8tz5HY0V4'
         while True:
             number_order = random.randint(10000000, 99999999)
@@ -54,8 +59,13 @@ def create_link(request):
 
         description = f'Поезд: {train}     Вагон: {van}     Место: {place}\nЗаказ: '
 
-        for key, item in products.items():
+        for key, item in productss.items():
             description += f'{key}: {item}     '
+
+        print(json.dumps([{
+                'label': f'Заказ: №{number_order}',
+                'amount': prices*100,
+            }]))
 
         data = {
             'title': f'Заказ: №{number_order}', 
@@ -72,7 +82,12 @@ def create_link(request):
         }
 
         link = requests.get(f'https://api.telegram.org/bot{token}/createInvoiceLink?', data=data)
-        link = json.loads(link.text)['result']
+        print(link)
+        link = json.loads(link.text)["result"]
+        print(user_id)
+        print(number_order)
+        print(products)
+        print(prices)
 
         cursor.execute(f"INSERT INTO orders VALUES ({user_id}, {number_order}, '{products}', {prices}, 0, 0)")
         conn.commit()
